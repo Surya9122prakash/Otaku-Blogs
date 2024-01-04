@@ -32,7 +32,7 @@ const corsOptions = {
   credentials: true, // Enable credentials (cookies, authorization headers)
 };
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
