@@ -1,0 +1,154 @@
+body{
+  background: linear-gradient(35deg,#0f0a0a,70%,gold);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.image-set img{
+  @apply md:h-[300px] h-[180px];
+  position: absolute;
+  transform: translateX(-150%);
+  filter:drop-shadow(0 0 5px yellow);
+  scale: 0;
+  animation:PopUp 1s ease forwards,Bounce 4s ease infinite;
+  animation-delay: 0s,5s;
+}
+
+
+
+@keyframes PopUp {
+  0%{
+    scale: 0;
+  } 
+  100%{
+    scale:1;
+  }
+}
+
+@keyframes Bounce{
+  0%,100%{
+    transform: translateY(0) translateX(-150%);
+  }
+  50%{
+    transform:translateY(-8px) translateX(-150%);
+  }
+}
+
+.image-set img:nth-child(1){
+  @apply md:left-[630px] left-[260px];
+  @apply md:top-[300px] top-[500px];
+  z-index:1;
+}
+
+.image-set img:nth-child(2){
+  @apply md:left-[620px] left-[260px];
+  @apply md:top-[280px] top-[485px];
+  scale: 0;
+  animation-delay: .5s,5s;
+  z-index:-2;
+}
+.image-set img:nth-child(3){
+  @apply md:left-[590px] left-[245px];
+  @apply md:top-[250px] top-[470px];
+  scale: 0;
+  animation-delay: 1s,4.5s;
+  z-index:-2;
+}
+.image-set img:nth-child(4){
+  @apply md:left-[450px] left-[170px];
+  @apply md:top-[230px] top-[465px];
+  scale: 0;
+  animation-delay: 1.5s,5s;
+  z-index:-10;
+}
+
+.image-set img:nth-child(5){
+  @apply md:left-[550px] left-[230px];
+  @apply md:top-[200px] top-[450px];
+  scale: 0;
+  animation-delay: 2s,5s;
+  z-index:-20;
+}
+
+.image-set img:nth-child(6){
+  @apply md:left-[780px] left-[360px];
+  @apply md:top-[200px] top-[450px];
+  scale: 0;
+  animation-delay: 2.5s,4.5s;
+  z-index:-24;
+  @apply md:h-[350px] h-[220px];
+}
+
+.image-set img:nth-child(7){
+  @apply md:left-[420px] left-[165px];
+  @apply md:top-[190px] top-[440px];
+  scale: 0;
+  animation-delay: 3s,6s;
+  z-index:-15;
+}
+
+.image-set img:nth-child(8){
+  @apply md:left-[740px] left-[350px];
+  @apply md:top-[100px] top-[415px];
+  scale: 0;
+  animation-delay: 3.5s,5s;
+  z-index:-30;
+}
+
+.image-set img:nth-child(9){
+  @apply md:left-[650px] left-[280px];
+  @apply md:top-[180px] top-[440px];
+  scale: 0;
+  animation-delay: 4s,5.2s;
+  z-index:-25;
+}
+
+.image-set img:nth-child(10){
+  @apply md:left-[520px] left-[220px];
+  @apply md:top-[160px] top-[440px];
+  scale: 0;
+  animation-delay: 4.5s,6s;
+  z-index:-18;
+}
+.image-set img:nth-child(11){
+  @apply md:left-[480px] left-[180px];
+  @apply md:top-[290px] top-[495px];
+  scale: 0;
+  animation-delay: 5s,5s;
+  z-index:-2;
+}
+.image-set img:nth-child(12){
+  @apply md:left-[780px] left-[360px];
+  @apply md:top-[200px] top-[460px];
+  scale: 0;
+  animation-delay: 5.5s,4.7s;
+  z-index:-30;
+}
+
+.image-set img:nth-child(13){
+  @apply md:left-[770px] left-[350px];
+  @apply md:top-[130px] top-[405px];
+  scale: 0;
+  animation-delay: 6s,5.4s;
+  z-index:-30;
+}
+
+.image-set img:nth-child(14){
+  @apply md:left-[480px] left-[190px];
+  @apply md:top-[110px] top-[395px];
+  scale: 0;
+  animation-delay: 6.5s,5s;
+  z-index:-20;
+}
+
+.image-set img:nth-child(15){
+  @apply md:left-[1200px] left-[400px];
+  @apply md:top-[10px] top-[325px];
+  scale: 0;
+  @apply md:h-[400px] h-[320px] object-fill;
+  animation-delay: 8s,6.5s;
+  z-index:-50;
+  @apply md:h-[400px] h-[320px];
+  @apply w-screen;
+}

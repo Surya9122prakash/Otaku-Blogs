@@ -1,0 +1,6 @@
+MONGO_URI="mongodb+srv://surya:surya123@cluster0.htdrpka.mongodb.net/?retryWrites=true&w=majority"
+PORT = 5000
+SECRET = surya
+CLOUDINARY_CLOUD_NAME =dthytjb3h
+CLOUDINARY_API_KEY =535497959566182
+CLOUDINARY_API_SECRET =WI3Ev_YqOjHI3tRv2zLuk9rRCOg
