@@ -20,6 +20,7 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
+      document.cookie = `token=${res.data.token}; path=/;`;
       setUser(res.data);
       navigate("/");
     } catch (err) {
