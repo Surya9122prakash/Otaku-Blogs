@@ -27,14 +27,12 @@ mongoose
 
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
-
-var corsOptions = {
-  origin: 'http://otaku-blogs.vercel.app',
-  credentials:true
-}
+const corsOptions = {
+  origin: ["https://otaku-blogs.vercel.app", "http://otaku-blogs.vercel.app", "*"],
+  credentials: true, // Enable credentials (cookies, authorization headers)
+};
 
 app.use(cors(corsOptions));
-
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
