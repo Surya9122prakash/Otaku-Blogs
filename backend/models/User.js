@@ -13,8 +13,10 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
-        
+        required:true,   
+    },
+    token: {
+        type: String // Store the token here
     }
 },{timestamps:true})
 

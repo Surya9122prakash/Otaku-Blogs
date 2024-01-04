@@ -5,7 +5,6 @@ import axios from "axios";
 import { URL } from "../url";
 import { UserContext } from "../context/UserContext";
 import transition from "../components/Transition";
-import { Cookie } from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,11 +20,6 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-      const cookieString = Cookie.get("_HPVN");
-      const startIndex = cookieString.indexOf("eyJQb"); // Find the start of the token
-      const endIndex = cookieString.indexOf("jowfQ") + "jowfQ".length; // Find the end of the token
-      const token = cookieString.substring(startIndex, endIndex);
-      document.cookie = `token=${token}; path=/;`;
       setUser(res.data);
       navigate("/");
     } catch (err) {
