@@ -66,6 +66,11 @@ const PostDetails = () => {
   const postComment = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // Handle case when token doesn't exist in localStorage (user not logged in)
+        return; 
+      }
       const res = await axios.post(
         URL + "/api/comments/create",
         {
@@ -74,6 +79,9 @@ const PostDetails = () => {
           postId: postId,
           userId: user._id,
         },
+        {headers:{
+          Authorization:`Bearer ${token}`
+        }},
         { withCredentials: true }
       );
 
