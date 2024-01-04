@@ -30,10 +30,10 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 // app.use(cors());
 // app.use(cors())
 app.use(cookieParser());
-app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
-app.use("/api/posts", postRoute);
-app.use("/api/comments", commentRoute);
+app.use("/api/auth", cors(), authRoute);
+app.use("/api/users", cors(), userRoute);
+app.use("/api/posts", cors(), postRoute);
+app.use("/api/comments", cors(), commentRoute);
 
 app.get("/", (req, res) => {
   res.send("SErver is working");
