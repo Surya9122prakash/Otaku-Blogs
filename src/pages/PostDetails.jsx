@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
-import { URL, IF } from "../url";
+import { URL} from "../url";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import Loader from "../components/Loader";
