@@ -14,7 +14,7 @@ const Menu = () => {
       const res = await axios.get(URL + "/api/auth/logout", {
         withCredentials: true,
       });
-      // console.log(res)
+      localStorage.removeItem("token");
       setUser(null);
       navigate("/login");
     } catch (err) {
