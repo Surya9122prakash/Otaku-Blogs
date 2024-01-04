@@ -53,10 +53,9 @@ router.post("/login", async (req, res) => {
 //LOGOUT
 router.get("/logout", async (req, res) => {
   try {
-    const user = await User.findById(req.user._id); // Assuming req.user._id holds the logged-in user's ID
-
+    const user = await User.token(req.user.token); 
     if (!user) {
-      return res.status(404).json("User not found!");
+      return res.status(404).json("User not Logged In!");
     }
     user.token = undefined;
     await user.save();
@@ -71,27 +70,14 @@ router.get("/logout", async (req, res) => {
 });
 
 //REFETCH USER
-//REFETCH USER
-router.get("/refetch", async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id); // Assuming req.user._id holds the logged-in user's ID
-
-    if (!user || !user.token) {
-      return res.status(404).json("Token not found!");
+router.get("/refetch", (req, res) => {
+  const token = req.cookies.token;
+  jwt.verify(token, process.env.SECRET, {}, async (err, data) => {
+    if (err) {
+      return res.status(404).json(err);
     }
-
-    const token = user.token;
-
-    jwt.verify(token, process.env.SECRET, {}, (err, data) => {
-      if (err) {
-        return res.status(403).json("Token is not valid!");
-      }
-      res.status(200).json(data);
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json("Internal Server Error");
-  }
+    res.status(200).json(data);
+  });
 });
 
 module.exports = router;

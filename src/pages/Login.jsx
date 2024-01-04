@@ -20,6 +20,7 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
+      localStorage.setItem('token', res.data);
       setUser(res.data);
       navigate("/");
     } catch (err) {

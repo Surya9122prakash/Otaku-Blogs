@@ -15,8 +15,8 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:true,   
     },
-    token: {
-        type: String // Store the token here
+    token:{
+        type:String,
     }
 },{timestamps:true})
 
