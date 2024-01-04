@@ -35,7 +35,7 @@ const corsOptions = {
 
 app.use(cors({
   origin: 'https://otaku-blogs.vercel.app',
-  credentials: true,
+  credentials: true, // You might also need to enable credentials
 }));
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
