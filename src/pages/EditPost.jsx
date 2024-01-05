@@ -37,30 +37,6 @@ const EditPost = () => {
       // Handle case when token doesn't exist in localStorage (user not logged in)
       return;
     }
-    const post = {
-      title,
-      desc,
-      username: user.username,
-      userId: user._id,
-      categories: cats,
-    };
-
-    if (file) {
-      const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("img", filename);
-      data.append("file", file);
-      post.photo = filename;
-      // console.log(data)
-      //img upload
-      try {
-        const imgUpload = await axios.post(URL + "/api/upload", data);
-        // console.log(imgUpload.data)
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    //post upload
 
     try {
       const token = localStorage.getItem("token");
@@ -68,6 +44,28 @@ const EditPost = () => {
         // Handle case when token doesn't exist in localStorage (user not logged in)
         return;
       }
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "mystore");
+      data.append("cloud_name", "dthytjb3h");
+      const ress = await fetch(
+        "https://api.cloudinary.com/v1_1/dthytjb3h/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const cloudData = await ress.json();
+      const post = {
+        title,
+        desc,
+        photo: cloudData.url,
+        username: user.username,
+        userId: user._id,
+        categories: cats,
+      };
+      console.log(post);
       const res = await axios.put(
         URL + "/api/posts/" + postId,
         post,
