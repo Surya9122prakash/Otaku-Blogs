@@ -28,7 +28,7 @@ const Menu = () => {
           withCredentials: true,
         }
       );
-      localStorage.removeItem("token");
+      localStorage.setItem("token", null);
       setUser(null);
       navigate("/login");
     } catch (err) {
