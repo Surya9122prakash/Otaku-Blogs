@@ -11,6 +11,7 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
+      setUser(null);
       const token = localStorage.getItem("token");
       if (!token) {
         // Handle case when token doesn't exist in localStorage (user not logged in)
@@ -29,7 +30,6 @@ const Menu = () => {
         }
       );
       localStorage.setItem("token", null);
-      setUser(null);
       navigate("/login");
     } catch (err) {
       console.log(err);
