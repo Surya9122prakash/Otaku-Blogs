@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../verifyToken")
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -51,9 +52,9 @@ router.post("/login", async (req, res) => {
 });
 
 //LOGOUT
-router.post("/logout", async (req, res) => {
+router.post("/logout",verifyToken, async (req, res) => {
   try {
-    const token = req.body;
+    const token = req.headers.authorization;
 
     // Check if the token exists
     if (!token) {

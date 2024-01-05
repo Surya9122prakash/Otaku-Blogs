@@ -18,7 +18,12 @@ const Menu = () => {
       }
       const res = await axios.post(
         URL + "/api/auth/logout",
-        {token},
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
         {
           withCredentials: true,
         }
