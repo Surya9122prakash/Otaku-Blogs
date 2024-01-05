@@ -38,7 +38,7 @@ const Menu = () => {
   return (
     <div className="bg-black w-[200px] z-10 flex flex-col items-start absolute top-16 right-6 md:right-32 rounded-md p-4 space-y-4">
       <h3 className="text-yellow-400 text-sm cursor-pointer">
-        <Link to="/">Home</Link>
+        <Link to="/index">Home</Link>
       </h3>
       {!user && (
         <h3 className="text-yellow-400 text-sm cursor-pointer">
