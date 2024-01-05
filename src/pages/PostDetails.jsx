@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
-import { URL} from "../url";
+import { URL } from "../url";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import Loader from "../components/Loader";
@@ -23,12 +23,18 @@ const PostDetails = () => {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(URL + "/api/posts/" + postId,{withCredentials:true});
+      const res = await axios.get(URL + "/api/posts/" + postId, {
+        withCredentials: true,
+      });
       // console.log(res.data)
       setPost(res.data);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleCommentDelete = (commentId) => {
+    setComments(comments.filter(comment => comment._id !== commentId));
   };
 
   const handleDeletePost = async () => {
@@ -66,10 +72,10 @@ const PostDetails = () => {
   const postComment = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
         // Handle case when token doesn't exist in localStorage (user not logged in)
-        return; 
+        return;
       }
       const res = await axios.post(
         URL + "/api/comments/create",
@@ -79,15 +85,19 @@ const PostDetails = () => {
           postId: postId,
           userId: user._id,
         },
-        {headers:{
-          Authorization:`Bearer ${token}`
-        }},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
         { withCredentials: true }
       );
 
+      const newComment = res.data;
       // fetchPostComments()
       // setComment("")
-      window.location.reload(true);
+      setComments([...comments, newComment]);
+      setComment("");
     } catch (err) {
       console.log(err);
     }
@@ -123,8 +133,12 @@ const PostDetails = () => {
           <div className="flex items-center justify-between mt-2 md:mt-4">
             <p className="text-yellow-400 font-semibold">@{post.username}</p>
             <div className="flex space-x-2">
-              <p className="text-yellow-400 font-semibold">{new Date(post.updatedAt).toString().slice(16, 24)}</p>
-              <p className="text-yellow-400 font-semibold">{new Date(post.updatedAt).toString().slice(0, 15)}</p>
+              <p className="text-yellow-400 font-semibold">
+                {new Date(post.updatedAt).toString().slice(16, 24)}
+              </p>
+              <p className="text-yellow-400 font-semibold">
+                {new Date(post.updatedAt).toString().slice(0, 15)}
+              </p>
             </div>
           </div>
           <img src={post.photo} className="w-full  mx-auto mt-8" alt="" />
@@ -134,7 +148,10 @@ const PostDetails = () => {
             <div className="flex justify-center items-center space-x-2">
               {post.categories?.map((c, i) => (
                 <>
-                  <div key={i} className="bg-black rounded-lg px-3 py-1 text-yellow-400">
+                  <div
+                    key={i}
+                    className="bg-black rounded-lg px-3 py-1 text-yellow-400"
+                  >
                     {c}
                   </div>
                 </>
@@ -142,9 +159,11 @@ const PostDetails = () => {
             </div>
           </div>
           <div className="flex flex-col mt-4">
-            <h3 className="mt-6 md:mb-4 font-semibold text-yellow-400">Comments:</h3>
+            <h3 className="mt-6 md:mb-4 font-semibold text-yellow-400">
+              Comments:
+            </h3>
             {comments?.map((c) => (
-              <Comment key={c._id} c={c} post={post} />
+              <Comment key={c._id} c={c} post={post} onCommentDelete={handleCommentDelete} />
             ))}
           </div>
           {/* write a comment */}

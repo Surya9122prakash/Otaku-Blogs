@@ -37,6 +37,12 @@ const CreatePost = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // Handle case when token doesn't exist in localStorage (user not logged in)
+      return;
+    }
+
     if (!user || !title || !desc) {
       // Validate if the user is logged in and required fields are present
       return;
@@ -67,9 +73,18 @@ const CreatePost = () => {
         categories: cats,
       };
       console.log(post);
-      const res = await axios.post(URL + "/api/posts/create", post, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        URL + "/api/posts/create",
+        post,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
       navigate("/posts/post/" + res.data._id);
 
       setPic(res.data.photo.url);
@@ -82,7 +97,9 @@ const CreatePost = () => {
     <div>
       <Navbar />
       <div className="px-6 pb-10 md:px-[200px] mt-8">
-        <h1 className="font-bold md:text-2xl text-xl text-yellow-400">Create a post</h1>
+        <h1 className="font-bold md:text-2xl text-xl text-yellow-400">
+          Create a post
+        </h1>
         <form className="w-full flex flex-col space-y-4 md:space-y-8 mt-4">
           <input
             onChange={(e) => setTitle(e.target.value)}
