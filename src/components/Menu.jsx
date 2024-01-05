@@ -11,9 +11,22 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(URL + "/api/auth/logout", {
-        withCredentials: true,
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // Handle case when token doesn't exist in localStorage (user not logged in)
+        return;
+      }
+      const res = await axios.get(
+        URL + "/api/auth/logout",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
       localStorage.removeItem("token");
       setUser(null);
       navigate("/login");

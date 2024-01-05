@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
 //LOGOUT
 router.get("/logout", async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.headers.authorization;;
 
     // Check if the token exists
     if (!token) {
