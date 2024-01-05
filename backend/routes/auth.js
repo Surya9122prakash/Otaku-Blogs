@@ -53,21 +53,32 @@ router.post("/login", async (req, res) => {
 //LOGOUT
 router.get("/logout", async (req, res) => {
   try {
-    const user = await User.token(req.user.token); 
+    const token = req.cookies.token;
+
+    // Check if the token exists
+    if (!token) {
+      return res.status(404).json("User not Logged In!");
+    }
+
+    // Find the user associated with the token
+    const user = await User.findOne({ token });
+
+    // Check if the user exists
     if (!user) {
       return res.status(404).json("User not Logged In!");
     }
+
+    // Invalidate the token by removing it from the user document
     user.token = undefined;
     await user.save();
 
-    res
-      .clearCookie("token", { sameSite: "none", secure: true })
-      .status(200)
-      .send("User logged out successfully!");
+    // Clear the token cookie from the client
+    res.clearCookie("token", { sameSite: "none", secure: true }).status(200).send("User logged out successfully!");
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 //REFETCH USER
 router.get("/refetch", (req, res) => {

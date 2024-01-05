@@ -102,7 +102,7 @@ const EditPost = () => {
   return (
     <div>
       <Navbar />
-      <div className="px-6 md:px-[200px] mt-8">
+      <div className="px-6 md:px-[200px] mt-8 mb-5">
         <h1 className="font-bold md:text-2xl text-xl text-yellow-400">
           Update a post
         </h1>
