@@ -16,13 +16,9 @@ const Menu = () => {
         // Handle case when token doesn't exist in localStorage (user not logged in)
         return;
       }
-      const res = await axios.get(
+      const res = await axios.post(
         URL + "/api/auth/logout",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        {token},
         {
           withCredentials: true,
         }
