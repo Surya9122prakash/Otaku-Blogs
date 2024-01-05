@@ -34,14 +34,27 @@ const PostDetails = () => {
   };
 
   const handleCommentDelete = (commentId) => {
-    setComments(comments.filter(comment => comment._id !== commentId));
+    setComments(comments.filter((comment) => comment._id !== commentId));
   };
 
   const handleDeletePost = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // Handle case when token doesn't exist in localStorage (user not logged in)
+      return;
+    }
     try {
-      const res = await axios.delete(URL + "/api/posts/" + postId, {
-        withCredentials: true,
-      });
+      const res = await axios.delete(
+        URL + "/api/posts/" + postId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res.data);
       navigate("/");
     } catch (err) {
@@ -163,7 +176,12 @@ const PostDetails = () => {
               Comments:
             </h3>
             {comments?.map((c) => (
-              <Comment key={c._id} c={c} post={post} onCommentDelete={handleCommentDelete} />
+              <Comment
+                key={c._id}
+                c={c}
+                post={post}
+                onCommentDelete={handleCommentDelete}
+              />
             ))}
           </div>
           {/* write a comment */}

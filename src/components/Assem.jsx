@@ -27,7 +27,7 @@ const Assem = () => {
           </div>
           <div className="md:pl-44 pl-12 pt-5">
             <button
-              className="w-[70%] px-4 p-2 border border-yellow-400 rounded-full flex animate-bounce"
+              className="w-[60%] px-4 p-2 border border-yellow-400 rounded-full flex animate-bounce"
               onClick={() => navigate("/index")}
             >
               <h1 className="text-2xl text-yellow-400 font-semibold pr-2">

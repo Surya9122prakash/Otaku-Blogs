@@ -143,7 +143,7 @@ body{
 }
 
 .image-set img:nth-child(15){
-  @apply md:left-[1260px] left-[400px];
+  @apply md:left-[1290px] left-[400px];
   @apply md:top-[10px] top-[325px];
   scale: 0;
   @apply md:h-[400px] h-[320px] object-fill;

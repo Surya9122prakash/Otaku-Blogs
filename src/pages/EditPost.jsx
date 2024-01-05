@@ -32,6 +32,11 @@ const EditPost = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // Handle case when token doesn't exist in localStorage (user not logged in)
+      return;
+    }
     const post = {
       title,
       desc,
